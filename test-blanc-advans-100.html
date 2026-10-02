@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Test blanc intensif – Advans CI (100 questions)</title>
+<style>
+:root{--bg:#f6f7f4;--card:#fff;--ink:#1d2a24;--mut:#5d6b64;--line:#d9dfda;--acc:#0f6b4f;--accb:#e3f1ea;--bad:#b3261e;--badb:#fbe6e4;--warn:#9a6700;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121815;--card:#1a231e;--ink:#e8eee9;--mut:#9aa8a0;--line:#2c3a33;--acc:#4cc59a;--accb:#173226;--bad:#ff8a80;--badb:#3a1e1c;--warn:#e3b341}}
+:root[data-theme="dark"]{--bg:#121815;--card:#1a231e;--ink:#e8eee9;--mut:#9aa8a0;--line:#2c3a33;--acc:#4cc59a;--accb:#173226;--bad:#ff8a80;--badb:#3a1e1c;--warn:#e3b341}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.45}
+main{max-width:720px;margin:0 auto;padding:14px}
+h1,h2{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:.2em 0 .4em}
+h1{font-size:1.6rem}h2{font-size:1.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:10px 0}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+#timer{font-family:Georgia,serif;font-size:1.6rem;font-weight:700;color:var(--acc)}
+#timer.low{color:var(--bad)}
+.sec{color:var(--mut);font-size:.92rem}
+.opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:8px;padding:11px 14px;margin:7px 0;font:inherit;cursor:pointer}
+.opt:hover{border-color:var(--acc)}
+.opt.sel{border-color:var(--acc);background:var(--accb);font-weight:600}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fg .opt{margin:0;text-align:center}.fg .opt b{display:block;margin-bottom:2px}
+.btn{background:var(--acc);color:var(--bg);border:0;border-radius:8px;padding:11px 18px;font:inherit;font-weight:600;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.4}
+.btn:focus-visible,.opt:focus-visible,.dot:focus-visible{outline:3px solid var(--warn);outline-offset:2px}
+.row{display:flex;gap:8px;justify-content:space-between;margin-top:12px;flex-wrap:wrap}
+.nav{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0}
+.dot{width:27px;height:27px;border-radius:5px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.72rem;cursor:pointer;padding:0}
+.dot.done{background:var(--accb);border-color:var(--acc)}
+.dot.fl{border-color:var(--warn);border-width:2.5px}
+.dot.cur{outline:2px solid var(--ink)}
+.lik{display:flex;gap:6px}.lik .opt{text-align:center;margin:6px 0}
+.lab{display:flex;justify-content:space-between;color:var(--mut);font-size:.85rem}
+.seq{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0 12px}
+.fb{display:inline-flex;width:62px;height:62px;border:1.5px solid var(--line);border-radius:6px;align-items:center;justify-content:center;color:var(--ink)}
+.fb.q{font-size:1.5rem;font-weight:700;color:var(--acc)}
+.mat{display:grid;grid-template-columns:repeat(3,62px);gap:6px;margin:6px 0 12px}
+.ok{color:var(--acc)}.ko{color:var(--bad)}
+.rev{border-left:4px solid var(--bad);background:var(--badb);padding:6px 12px;margin:10px 0;border-radius:0 6px 6px 0}
+.rev svg{max-width:100%}
+.inl{display:inline-block;vertical-align:middle;margin:0 4px}
+table{width:100%;border-collapse:collapse}td,th{padding:7px;border-bottom:1px solid var(--line);text-align:left}
+.note{color:var(--mut);font-size:.9rem}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<section id="intro" class="card">
+<h1>Test blanc intensif – Advans CI</h1>
+<p><b>100 questions en 30 minutes</b>, soit 18 secondes par question. C'est volontairement plus dur que le vrai test : si tu tiens ce rythme, demain sera confortable. Les chiffres changent à chaque nouvelle série.</p>
+<table>
+<tr><td>Calcul mental et pourcentages</td><td>25</td></tr>
+<tr><td>Proportionnalité et problèmes</td><td>10</td></tr>
+<tr><td>Suites numériques</td><td>10</td></tr>
+<tr><td>Suites de lettres</td><td>5</td></tr>
+<tr><td>Figures et séries visuelles</td><td>15</td></tr>
+<tr><td>Logigrammes (organigrammes)</td><td>5</td></tr>
+<tr><td>Gestion, comptabilité, microfinance</td><td>15</td></tr>
+<tr><td>Culture pratique Côte d'Ivoire</td><td>6</td></tr>
+<tr><td>Bon sens professionnel</td><td>5</td></tr>
+<tr><td>Personnalité</td><td>4</td></tr>
+</table>
+<p class="note">Sans calculatrice, brouillon autorisé. Un clic sur une réponse passe à la question suivante. Utilise le bouton « À revoir » pour marquer une question et y revenir.</p>
+<div class="row"><button class="btn" id="go">Lancer le test (30 min)</button><button class="btn alt" id="go2">Entraînement sans chrono</button></div>
+</section>
+
+<section id="test" hidden>
+<div class="top"><span class="sec" id="secname"></span><span id="timer">30:00</span></div>
+<div class="card"><div class="sec" id="qnum"></div><h2 id="qtext"></h2><div id="fig"></div><div id="opts"></div>
+<div class="row"><button class="btn alt" id="prev">Précédente</button><button class="btn alt" id="flag">À revoir</button><button class="btn" id="next">Suivante</button></div></div>
+<div class="nav" id="nav"></div>
+<button class="btn alt" id="finish">Terminer et corriger</button>
+</section>
+<section id="res" hidden></section>
+</main>
+<script>
+var $=function(i){return document.getElementById(i)};
+var R=function(a,b){return a+Math.floor(Math.random()*(b-a+1))};
+var P=function(a){return a[R(0,a.length-1)]};
+var rd=function(x){return Math.round(x*100)/100};
+var F=function(n){var s=String(rd(n)).split(".");s[0]=s[0].replace(/\B(?=(\d{3})+(?!\d))/g,"\u00a0");return s.join(",")};
+var fc=function(n){return F(n)+" FCFA"},fp=function(n){return F(n)+" %"},fm=function(n){return F(n)+" min"},fl=function(n){return String.fromCharCode(64+n)};
+function sh(a){for(var i=a.length-1;i>0;i--){var j=R(0,i),t=a[i];a[i]=a[j];a[j]=t}return a}
+function mk(s,q,c,ds,e,f,r){c=rd(c);f=f||F;r=r||[0,1e12];var o=[c],x=ds.concat([c+1,c-1,c+2,c-2,c*2,c+10,c-10,c+5]);for(var i=0;i<x.length&&o.length<4;i++){var v=rd(x[i]);if(o.indexOf(v)<0&&v>=r[0]&&v<=r[1])o.push(v)}sh(o);return{s:s,q:q,o:o.map(f),a:o.indexOf(c),e:e}}
+var S=["Calcul mental","Proportionnalité et problèmes","Suites numériques","Suites de lettres","Figures et séries visuelles","Logigrammes","Gestion et comptabilité","Culture pratique CI","Bon sens professionnel","Personnalité"];
+var CTX=["Une commerçante du marché d'Adjamé","Un transporteur de Yopougon","Un planteur de cacao de Daloa","Une couturière de Cocody","Un grossiste de Treichville","Un éleveur de Korhogo","Une restauratrice de Marcory"];
+var ctx=function(){return P(CTX)};
+
+/* ---------- Calcul mental ---------- */
+var CG=[
+function(){var a=P([5,12,15,18,25,35,45,60,75]),N=R(4,40)*200,c=N*a/100;return mk(0,"Calcule "+a+" % de "+fc(N)+".",c,[N*a/10,N*a/1000,N/a],"10 % = "+F(N/10)+" ; 5 % = moitié ; 1 % = centième. On combine : "+F(c)+".",fc)},
+function(){var p=R(5,60)*1000,r=P([10,15,20,25,30,35]),c=p*(1-r/100);return mk(0,"Un article à "+fc(p)+" est soldé à −"+r+" %. Nouveau prix ?",c,[p*r/100,p*(1+r/100)],"Remise = "+F(p*r/100)+" ; "+F(p)+" − "+F(p*r/100)+" = "+F(c)+".",fc)},
+function(){var o=R(2,20)*100,pc=P([10,20,25,30,40,50,60]),n=o*(1+pc/100);return mk(0,"Un prix passe de "+F(o)+" à "+F(n)+" FCFA. Taux d'augmentation ?",pc,[pc*2,pc/2,pc+10],"Hausse = "+F(n-o)+" sur la base de départ "+F(o)+" : "+pc+" %.",fp)},
+function(){var p=R(4,40)*5000,a=P([10,20,50]),b=P([10,20,25]),c=p*(1+a/100)*(1-b/100);return mk(0,"Un salaire de "+fc(p)+" augmente de "+a+" %, puis baisse de "+b+" %. Salaire final ?",c,[p,p*(1+(a-b)/100)],"× "+F(1+a/100)+" puis × "+F(1-b/100)+" = "+F(c)+". Les pourcentages ne s'annulent pas.",fc)},
+function(){var h=R(4,80)*5000,c=h*1.18;return mk(0,"Un produit coûte "+fc(h)+" HT. Prix TTC avec une TVA de 18 % ?",c,[h*.18,h*1.8],"TVA = "+F(h*.18)+" ; TTC = HT × 1,18 = "+F(c)+".",fc)},
+function(){var h=R(4,80)*5000,t=h*1.18;return mk(0,"Un prix TTC est de "+fc(t)+" (TVA 18 %). Prix HT ?",h,[t*.82,t/1.8],"HT = TTC ÷ 1,18 = "+F(h)+". Piège : retirer 18 % du TTC (× 0,82) est faux.",fc)},
+function(){var m=R(9,15),o,x,sm;do{o=[1,2,3,4].map(function(){return R(5,18)});sm=o[0]+o[1]+o[2]+o[3];x=5*m-sm}while(x<4||x>20);return mk(0,"La moyenne de 5 notes est "+m+". Quatre notes valent "+o.join(", ")+". Quelle est la cinquième ?",x,[m,x+2,x-2],"Somme = 5 × "+m+" = "+5*m+" ; "+5*m+" − "+sm+" = "+x+".")},
+function(){var b=P([4,5,6,8]),a=R(1,b-1),N=b*R(10,100)*10,c=N/b*a;return mk(0,"Calcule "+a+"/"+b+" de "+fc(N)+".",c,[N/b,N-c],"1/"+b+" = "+F(N/b)+" ; × "+a+" = "+F(c)+".",fc)},
+function(){var n=P([13,14,16,17,18,19,21,22,23,24,25,26,27,28,29]),c=n*n;return mk(0,"Calcule "+n+" × "+n+".",c,[c+n,c-n,c+10],n+" × 10 + "+n+" × "+(n-10)+" = "+n*10+" + "+n*(n-10)+" = "+c+".")},
+function(){var a=R(12,48),m=P([25,15,99,11]),c=a*m,ast={25:"× 100 puis ÷ 4",15:"× 10 puis ajouter la moitié",99:"× 100 puis retirer "+a,11:"× 10 puis ajouter "+a};return mk(0,"Calcule "+a+" × "+m+".",c,[c+m,c-m,c+10],"Astuce : "+ast[m]+" = "+F(c)+".")}
+];
+/* ---------- Proportionnalité ---------- */
+var PG=[
+function(){var k=P([3,4,5,6,8]),u=R(2,30)*50,m=P([7,9,10,12,15]);while(m==k)m=P([7,9,10,12,15]);return mk(1,k+" cahiers coûtent "+fc(k*u)+". Combien coûtent "+m+" cahiers ?",u*m,[u*(m-1),u*(m+1)],"Prix unitaire = "+F(k*u)+" ÷ "+k+" = "+F(u)+" ; × "+m+" = "+F(u*m)+".",fc)},
+function(){var n1,t1,n2;do{n1=P([4,6,8,9]);t1=P([6,10,12,15]);n2=P([3,5,12,18])}while((n1*t1)%n2!=0);var c=n1*t1/n2;return mk(1,n1+" ouvriers terminent un chantier en "+t1+" jours. Combien de jours pour "+n2+" ouvriers (même rythme) ?",c,[t1*n2/n1,t1+Math.abs(n2-n1)],"Travail total = "+n1+" × "+t1+" = "+n1*t1+" jours-ouvriers ; ÷ "+n2+" = "+F(c)+" jours.")},
+function(){var r=P([[2,3],[3,5],[1,4],[3,2],[2,5]]),k=R(2,20)*10000,S2=(r[0]+r[1])*k;return mk(1,"Awa et Koffi se partagent un bénéfice de "+fc(S2)+" selon leurs apports, dans le rapport "+r[0]+":"+r[1]+". Part d'Awa ?",r[0]*k,[r[1]*k,S2/2,(r[0]+1)*k],"Nombre de parts = "+(r[0]+r[1])+" ; 1 part = "+F(k)+" ; Awa = "+r[0]+" × "+F(k)+" = "+F(r[0]*k)+".",fc)},
+function(){var D=P([120,180,240,300]),v=P([60,80,90,100,120]),c=D/v*60;return mk(1,"Un car roule à "+v+" km/h. Combien de minutes pour parcourir "+D+" km ?",c,[D/v*100,c+30,c-30],"Temps = "+D+" ÷ "+v+" = "+F(D/v)+" h = "+F(c)+" min (× 60).",fm)}
+];
+/* ---------- Suites numériques ---------- */
+function seqn(i){var t,n,e,k;switch(i%10){
+case 0:var a=R(2,30),d=R(3,17);t=[0,1,2,3,4,5].map(function(k){return a+k*d});n=a+6*d;e="Écart constant : +"+d+".";break;
+case 1:var a1=R(1,5),r=P([2,3]);t=[0,1,2,3,4].map(function(k){return a1*Math.pow(r,k)});n=a1*Math.pow(r,5);e="Chaque terme est multiplié par "+r+".";break;
+case 2:var a2=R(1,10),d0=R(1,4),st=R(1,3),x=a2,df=[];t=[a2];for(k=0;k<5;k++){df.push(d0+k*st);x+=d0+k*st;t.push(x)}n=x+d0+5*st;e="Écarts : +"+df.join(", +")+", puis +"+(d0+5*st)+" (les écarts augmentent de "+st+").";break;
+case 3:var c3=P([0,1,-1,2]),n0=R(1,4);t=[0,1,2,3,4].map(function(k){return Math.pow(n0+k,2)+c3});n=Math.pow(n0+5,2)+c3;e="Carrés successifs"+(c3?" "+(c3>0?"+":"−")+Math.abs(c3):"")+" : "+(n0+5)+"² = "+F(n-c3)+".";break;
+case 4:var f1=R(1,5),f2=R(2,6);t=[f1,f2];for(k=0;k<4;k++)t.push(t[k]+t[k+1]);n=t[4]+t[5];e="Chaque terme = somme des deux précédents ("+t[4]+" + "+t[5]+").";break;
+case 5:var a5=R(1,5),k5=P([1,-1,2,3]);t=[a5];for(k=0;k<4;k++)t.push(2*t[k]+k5);n=2*t[4]+k5;e="Chaque terme = 2 × précédent "+(k5>=0?"+ ":"− ")+Math.abs(k5)+".";break;
+case 6:var a6=R(1,9),d1=R(2,5),b6=R(20,40),d2=R(2,6);t=[a6,b6,a6+d1,b6+d2,a6+2*d1,b6+2*d2,a6+3*d1];n=b6+3*d2;e="Deux suites entrelacées : "+a6+" (+"+d1+") et "+b6+" (+"+d2+"). Prochain : "+b6+" + 3 × "+d2+" = "+n+".";break;
+case 7:var a7=R(2,5),m7=R(1,3);t=[a7];for(k=0;k<4;k++)t.push(2*t[k]-m7);n=2*t[4]-m7;e="Chaque terme = 2 × précédent − "+m7+".";break;
+case 8:var a8=R(1,10);t=[a8,a8+1,a8+3,a8+7,a8+15,a8+31];n=a8+63;e="Les écarts doublent : +1, +2, +4, +8, +16, +32, +64.";break;
+default:var c9=P([0,1,-1]),n9=R(1,3);t=[0,1,2,3,4].map(function(k){return Math.pow(n9+k,3)+c9});n=Math.pow(n9+5,3)+c9;e="Cubes successifs"+(c9?" "+(c9>0?"+":"−")+Math.abs(c9):"")+" : "+(n9+5)+"³ = "+F(n-c9)+".";}
+return mk(2,"Complète la suite : "+t.join(", ")+", ?",n,[n*1.1,n*.9],e)}
+/* ---------- Suites de lettres ---------- */
+function lett(i){var a,t=[],n,e;switch(i%3){
+case 0:var s=P([2,3,4]);a=R(1,26-6*s);for(var k=0;k<6;k++)t.push(a+k*s);n=a+6*s;e="Saut constant de +"+s+" lettres.";break;
+case 1:a=R(1,5);var x=a;t=[a];for(k=1;k<=5;k++){x+=k;t.push(x)}n=x+6;e="Les sauts augmentent de 1 : +1, +2, +3, +4, +5, puis +6.";break;
+default:a=R(1,8);var y=a;t=[a];for(k=0;k<5;k++){y+=(k%2?3:2);t.push(y)}n=y+3;e="Sauts alternés : +2, +3, +2, +3, +2, puis +3."}
+return mk(3,"Complète : "+t.map(fl).join(", ")+", ?",n,[n-1,n+1,n-2,n+2,n-3],e+" Réponse : "+fl(n)+".",fl,[1,26])}
+/* ---------- Figures ---------- */
+function fb(s,c){return '<span class="fb'+(c||"")+'">'+s+"</span>"}
+function seq(a,q){return '<div class="seq">'+a.map(function(s){return fb(s)}).join("")+(q?fb("?"," q"):"")+"</div>"}
+function arrow(g,z){g=((g%360)+360)%360;return '<svg viewBox="-20 -20 40 40" width="'+z+'" height="'+z+'"><g transform="rotate('+g+')" stroke="currentColor" fill="currentColor" stroke-width="3"><line x1="0" y1="12" x2="0" y2="-9"/><polygon points="0,-18 -8,-6 8,-6" stroke-width="1"/></g></svg>'}
+function quad(st,z){var h="";st.forEach(function(k){h+='<rect x="'+(k==1||k==2?22:2)+'" y="'+(k>=2?22:2)+'" width="20" height="20" fill="currentColor"/>'});return '<svg viewBox="0 0 44 44" width="'+z+'" height="'+z+'">'+h+'<rect x="2" y="2" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"/><path d="M22,2V42M2,22H42" stroke="currentColor" stroke-width="1"/></svg>'}
+function dots(n,z){var h="";for(var k=0;k<n;k++)h+='<circle cx="'+(10+12*(k%3))+'" cy="'+(10+12*Math.floor(k/3))+'" r="4.5" fill="currentColor"/>';return '<svg viewBox="0 0 44 44" width="'+z+'" height="'+z+'">'+h+"</svg>"}
+function fo(q,fig,c,oth,r,e){var v=[c];sh(oth.slice()).forEach(function(x){if(v.indexOf(x)<0&&v.length<4)v.push(x)});sh(v);return{s:4,q:q,fig:fig,o:v.map(r),a:v.indexOf(c),h:1,e:e}}
+var nm=function(g){return((g%360)+360)%360};
+function figArrow(i){var a0=P([0,45,90,135,180,225,270,315]),s,t,c,e;
+if(i<3){s=P([45,90,135,-45,-90,-135]);t=[0,1,2,3].map(function(k){return a0+k*s});c=a0+4*s;e="La flèche tourne de "+Math.abs(s)+"° à chaque étape dans le sens "+(s>0?"horaire":"antihoraire")+"."}
+else{s=P([45,-45,90,-90]);t=[0,s,3*s,6*s].map(function(k){return a0+k});c=a0+10*s;e="Les rotations augmentent : "+s+"°, "+2*s+"°, "+3*s+"°, puis "+4*s+"° (sens "+(s>0?"horaire":"antihoraire")+")."}
+c=nm(c);return fo("Quelle flèche complète la série ?",seq(t.map(function(g){return arrow(g,44)}),1),c,[nm(c+45),nm(c-45),nm(c+90),nm(c+180)],function(g){return arrow(g,46)},e)}
+function figQuad(){var p=R(0,3),s=P([1,2,3]),st=function(q){return[q%4,(q+1)%4]},c=(p+3*s)%4;
+return fo("Quelle figure complète la série ?",seq([0,1,2].map(function(k){return quad(st((p+k*s)%4),44)}),1),c,[0,1,2,3],function(q){return quad(st(q),46)},"Le motif tourne de "+s+" quart"+(s>1?"s":"")+" de tour dans le sens horaire à chaque étape.")}
+function figDots(){var op=P(["+","-"]),rows=[],r,a,b;for(r=0;r<3;r++){if(op=="+"){a=R(1,4);b=R(1,4)}else{a=R(3,9);b=R(1,a-1)}rows.push([a,b,op=="+"?a+b:a-b])}
+var c=rows[2][2],alt=op=="+"?Math.abs(rows[2][0]-rows[2][1]):rows[2][0]+rows[2][1],cells="";
+rows.forEach(function(w,i){w.forEach(function(n,j){cells+=(i==2&&j==2)?fb("?"," q"):fb(dots(n,44))})});
+var o=fo("Quelle figure complète la matrice ?",'<div class="mat">'+cells+"</div>",c,[c+1,c-1,c+2,alt].filter(function(x){return x>=1&&x<=9&&x!=c}),function(n){return dots(n,46)},"Dans chaque ligne, la 3e case = 1re "+(op=="+"?"+":"−")+" 2e (ici "+rows[2][0]+" "+(op=="+"?"+":"−")+" "+rows[2][1]+" = "+c+" points).");
+return o}
+/* ---------- Logigrammes ---------- */
+function flow(n,o1,o2,T,a,b){var t=function(x,y,s){return'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="13" fill="currentColor">'+s+"</text>"},
+rc=function(x,y,w,r){return'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="30" rx="'+r+'" fill="none" stroke="currentColor" stroke-width="1.6"/>'},
+ln=function(d){return'<path d="'+d+'" fill="none" stroke="currentColor" stroke-width="1.6" marker-end="url(#ah)"/>'};
+return'<svg viewBox="0 0 360 380" width="100%" style="max-width:360px"><defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0L8,4L0,8z" fill="currentColor"/></marker></defs>'+
+rc(100,6,160,15)+t(180,26,"Début : N = "+n)+ln("M180,36V62")+rc(90,62,180,4)+t(180,82,"N ← N "+o1[0]+" "+o1[1])+ln("M180,92V114")+rc(90,114,180,4)+t(180,134,"N ← N "+o2[0]+" "+o2[1])+ln("M180,144V164")+
+'<path d="M180,164L270,196L180,228L90,196Z" fill="none" stroke="currentColor" stroke-width="1.6"/>'+t(180,201,"N > "+T+" ?")+ln("M90,196H50V250")+t(70,188,"Non")+ln("M270,196H310V250")+t(290,188,"Oui")+
+rc(5,250,90,4)+t(50,270,"N ← N + "+b)+rc(265,250,90,4)+t(310,270,"N ← N − "+a)+'<path d="M50,280V312H180M310,280V312H180" fill="none" stroke="currentColor" stroke-width="1.6"/>'+ln("M180,312V332")+rc(100,332,160,15)+t(180,352,"Sortie : N")+"</svg>"}
+function flowQ(){var ap=function(x,o){return o[0]=="×"?x*o[1]:o[0]=="+"?x+o[1]:x-o[1]},n=R(2,12),o1=P([["×",R(2,4)],["+",R(3,9)]]),o2=P([["+",R(2,9)],["−",R(1,5)]]),v=ap(ap(n,o1),o2),T=v+P([-3,-2,-1,1,2,3]),a=R(3,9),b=R(2,9),yes=v>T,c=yes?v-a:v+b,alt=yes?v+b:v-a;
+var q=mk(5,"Lis le logigramme. Si N = "+n+" au départ, quelle est la valeur de sortie ?",c,[alt,v,v+a],"N = "+n+" → "+ap(n,o1)+" → "+v+". Test « N > "+T+" ? » : "+(yes?"Oui, donc "+v+" − "+a:"Non, donc "+v+" + "+b)+" = "+c+".");q.fig=flow(n,o1,o2,T,a,b);return q}
+/* ---------- Gestion, comptabilité ---------- */
+var CP=[
+function(){var c=R(4,40)*5000,t=P([10,20,25,30,40,50]),p=c*(1+t/100);return mk(6,ctx()+" achète un article "+fc(c)+" et le revend "+fc(p)+". Taux de marge sur le coût d'achat ?",t,[(p-c)/p*100,t+5,t-5],"Marge = "+F(p-c)+" ; taux de marge = marge ÷ coût d'achat = "+t+" %. (Le taux de marque se calcule sur le prix de vente.)",fp)},
+function(){var t=P([20,25,40,50]),p=R(1,10)*20000,c=p*(1-t/100);return mk(6,"Un produit est vendu "+fc(p)+" pour un coût d'achat de "+fc(c)+". Taux de marque ?",t,[(p-c)/c*100,t+5,t-5],"Taux de marque = marge ÷ prix de vente = "+F(p-c)+"/"+F(p)+" = "+t+" %. (Sur le coût d'achat : "+F((p-c)/c*100)+" %.)",fp)},
+function(){var pr=R(20,90)*500000,ch=pr+P([-1,1])*R(1,12)*250000,c=pr-ch;return mk(6,"Une entreprise enregistre "+fc(pr)+" de produits et "+fc(ch)+" de charges. Quel est son résultat ?",c,[pr+ch,-c,pr],"Résultat = produits − charges = "+F(c)+" ("+(c>=0?"bénéfice":"perte")+").",fc,[-1e12,1e12])},
+function(){var ac=R(2,9)*10000000,de=ac*R(2,6)/10;return mk(6,"Au bilan, l'actif total est de "+fc(ac)+" et les dettes de "+fc(de)+". Capitaux propres ?",ac-de,[ac+de,de],"Actif = Passif = capitaux propres + dettes. CP = "+F(ac)+" − "+F(de)+" = "+F(ac-de)+".",fc)},
+function(){var n=P([4,5,8,10]),V=n*R(2,9)*100000;return mk(6,"Une machine de "+fc(V)+" est amortie en linéaire sur "+n+" ans. Dotation annuelle ?",V/n,[V/(n+1),V/(n-1)],"Amortissement linéaire = valeur ÷ durée = "+F(V)+" ÷ "+n+" = "+F(V/n)+" par an.",fc)},
+function(){var m=R(2,9)*500,Q=R(20,200),CF=m*Q,cv=R(2,8)*500,pu=cv+m;return mk(6,"Un atelier a "+fc(CF)+" de charges fixes par mois. Il vend l'unité "+fc(pu)+" avec un coût variable de "+fc(cv)+". Seuil de rentabilité (en unités) ?",Q,[CF/pu,CF/cv,Q+10],"Marge unitaire = "+F(pu)+" − "+F(cv)+" = "+F(m)+" ; seuil = "+F(CF)+" ÷ "+F(m)+" = "+Q+" unités.")},
+function(){var K=R(2,20)*50000,t=P([12,18,24,30]),n=P([3,6,9,12]),I=K*t/100*n/12;return mk(6,ctx()+" obtient un microcrédit de "+fc(K)+" à "+t+" % par an (intérêt simple) pour "+n+" mois. Intérêts à payer ?",I,[K*t/100,I*2,K*t/100*n],"Intérêts = capital × taux × durée = "+F(K)+" × "+t+" % × "+n+"/12 = "+F(I)+".",fc)},
+function(){var K=R(1,10)*300000,i=P([1,2,3]),n=P([4,5,6,10]),c=K/n+K*i/100;return mk(6,"Un prêt de "+fc(K)+" est remboursé en "+n+" mensualités égales, avec "+i+" % d'intérêt simple par mois sur le capital initial. Montant d'une mensualité ?",c,[K/n,c+K*i/100,c-K*i/100],"Capital par mois = "+F(K/n)+" ; intérêt par mois = "+F(K*i/100)+" ; mensualité = "+F(c)+".",fc)},
+function(){var V=R(5,40)*100000,A=R(1,V/100000-1)*100000,c=(V-A)*.18;return mk(6,"Ce mois-ci, une société vend pour "+fc(V)+" HT et achète pour "+fc(A)+" HT (TVA 18 %). TVA à reverser ?",c,[V*.18,(V+A)*.18,A*.18],"TVA collectée = "+F(V*.18)+" ; TVA déductible = "+F(A*.18)+" ; à reverser = "+F(c)+".",fc)},
+function(){var T=R(4,20)*100,pc=P([2,4,5,8,10]),L=T*pc/100;return mk(6,"Une IMF a un encours de crédits de "+T+" millions FCFA dont "+F(L)+" millions en retard de plus de 30 jours. Portefeuille à risque (PAR 30) ?",pc,[pc*2,pc/2,pc+3],"PAR = encours en retard ÷ encours total = "+F(L)+"/"+T+" = "+pc+" %.",fp)},
+function(){var c=R(4,40)*5000,t=P([20,25,30,40]);return mk(6,ctx()+" vise un taux de marge de "+t+" % sur un article acheté "+fc(c)+". Prix de vente ?",c*(1+t/100),[c*t/100,c/(1-t/100),c*(1+t/50)],"Prix de vente = "+F(c)+" × "+F(1+t/100)+" = "+F(c*(1+t/100))+".",fc)},
+function(){var p1=P([400,800]),d=P([40,80,120,200]),p2=p1+d,c=(100*p1+300*p2)/400;return mk(6,"Stock initial : 100 kg à "+p1+" FCFA. Achat : 300 kg à "+p2+" FCFA. CMUP du kg ?",c,[(p1+p2)/2,p2,p1],"CMUP = (100 × "+p1+" + 300 × "+p2+") ÷ 400 = "+F(c)+" FCFA. La moyenne simple des prix serait fausse.",fc)}
+];
+/* ---------- Questions fixes ---------- */
+function st(s,q,o,a,e){return{s:s,q:q,o:o,a:a,e:e}}
+var CU=[
+st(7,"Quelle institution émet le franc CFA en Côte d'Ivoire ?",["BEAC","BCEAO","BIDC","BOAD"],1,"La BCEAO émet le FCFA pour les huit pays de l'UEMOA. La BEAC concerne la zone CEMAC (Afrique centrale)."),
+st(7,"Quelle est la parité fixe entre l'euro et le FCFA ?",["1 € = 500 FCFA","1 € = 655,957 FCFA","1 € = 700 FCFA","1 € = 1 000 FCFA"],1,"1 € = 655,957 FCFA, parité fixe."),
+st(7,"Quelle est la capitale politique de la Côte d'Ivoire ?",["Abidjan","Bouaké","Yamoussoukro","San-Pédro"],2,"Yamoussoukro est la capitale politique ; Abidjan est la capitale économique."),
+st(7,"Quel produit agricole fait de la Côte d'Ivoire un leader mondial ?",["Café","Cacao","Coton","Riz"],1,"La Côte d'Ivoire est le premier producteur mondial de cacao."),
+st(7,"Quel pays n'appartient PAS à l'UEMOA ?",["Sénégal","Mali","Ghana","Togo"],2,"Le Ghana (cedi) est hors UEMOA."),
+st(7,"Ordre de grandeur du prix d'une tablette de 30 œufs ?",["≈ 900 FCFA","≈ 2 500 FCFA","≈ 5 000 FCFA","≈ 8 000 FCFA"],1,"Environ 2 000 à 3 000 FCFA selon le marché. Vérifie les prix actuels près de chez toi.")
+];
+var BS=[
+st(8,"Un client veut un crédit, mais son dossier est incomplet et il est pressé.",["Accorder pour ne pas le perdre","Refuser sèchement","Lister les pièces manquantes, l'aider à compléter et annoncer le délai","Passer le dossier à un collègue sans explication"],2,"Rigueur, pédagogie et respect de la procédure."),
+st(8,"Vous constatez une erreur dans un dossier que vous avez saisi hier.",["Ne rien dire","La corriger discrètement","Alerter votre responsable et corriger selon la procédure","Accuser le système informatique"],2,"Transparence, responsabilité, traçabilité."),
+st(8,"Un client mécontent hausse le ton au guichet.",["Hausser le ton aussi","L'ignorer","Écouter, reformuler, proposer une solution ou escalader","Lui demander de revenir demain"],2,"Calme, écoute, solution."),
+st(8,"Un collègue vous demande de valider un décaissement avec un dossier incomplet « pour dépanner un ami ».",["Valider pour rendre service","Refuser poliment, rappeler la procédure et informer le responsable si besoin","Valider mais le noter dans un carnet","Ignorer sa demande"],1,"On ne contourne jamais la procédure : risque de fraude et d'impayé."),
+st(8,"Un client en retard de remboursement ne répond plus à vos appels.",["Le menacer","Le relancer par plusieurs canaux, joindre son garant ou le visiter, proposer un échéancier","Clore son dossier","Attendre sans rien faire"],1,"Relance rapide, respectueuse et structurée ; la solution amiable passe avant le contentieux.")
+];
+var PS=[
+{s:9,q:"Je garde mon calme quand la pression monte.",L:1},{s:9,q:"Sous pression, je perds facilement mes moyens.",L:1},
+{s:9,q:"J'assume mes erreurs et je cherche à les corriger.",L:1},{s:9,q:"Quand je fais une erreur, je préfère ne pas en parler.",L:1}
+];
+var Q=[],i;
+for(i=0;i<25;i++)Q.push(CG[i%10]());
+for(i=0;i<10;i++)Q.push(PG[i%4]());
+for(i=0;i<10;i++)Q.push(seqn(i));
+for(i=0;i<5;i++)Q.push(lett(i));
+for(i=0;i<5;i++)Q.push(figArrow(i));
+for(i=0;i<5;i++)Q.push(figQuad());
+for(i=0;i<5;i++)Q.push(figDots());
+for(i=0;i<5;i++)Q.push(flowQ());
+for(i=0;i<15;i++)Q.push(CP[i%12]());
+Q=Q.concat(CU,BS,PS);
+var N=Q.length,ans=[],flg=[],cur=0,left=1800,tm=null,t0=0,done=false,free=false;
+function fmt(s){return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2)}
+function tick(){left--;$("timer").textContent=fmt(left);$("timer").className=left<=300?"low":"";if(left<=0)finish()}
+function start(f){free=f;$("intro").hidden=true;$("test").hidden=false;t0=Date.now();if(f)$("timer").textContent="Sans chrono";else tm=setInterval(tick,1000);show(0)}
+$("go").onclick=function(){start(false)};$("go2").onclick=function(){start(true)};
+function pick(i,k){ans[i]=k;show(i);setTimeout(function(){if(cur===i&&i<N-1)show(i+1)},200)}
+function show(i){cur=i;var q=Q[i];$("secname").textContent=S[q.s];$("qnum").textContent="Question "+(i+1)+" / "+N;$("qtext").textContent=q.q;$("fig").innerHTML=q.fig||"";
+var o=$("opts");o.innerHTML="";o.className=q.h?"fg":"";
+if(q.L){var r=document.createElement("div");r.className="lik";for(var k=1;k<=5;k++){(function(k){var b=document.createElement("button");b.className="opt"+(ans[i]===k?" sel":"");b.textContent=k;b.onclick=function(){pick(i,k)};r.appendChild(b)})(k)}
+o.appendChild(r);var l=document.createElement("div");l.className="lab";l.innerHTML="<span>1 = Pas du tout d'accord</span><span>5 = Tout à fait d'accord</span>";o.appendChild(l)}
+else q.o.forEach(function(t,k){var b=document.createElement("button");b.className="opt"+(ans[i]===k?" sel":"");if(q.h)b.innerHTML="<b>"+"ABCD"[k]+"</b>"+t;else b.textContent=t;b.onclick=function(){pick(i,k)};o.appendChild(b)});
+$("prev").disabled=i==0;$("next").disabled=i==N-1;$("flag").textContent=flg[i]?"Retirer le marquage":"À revoir";
+var n=$("nav");n.innerHTML="";Q.forEach(function(_,k){var d=document.createElement("button");d.className="dot"+(ans[k]!==undefined?" done":"")+(flg[k]?" fl":"")+(k==i?" cur":"");d.textContent=k+1;d.setAttribute("aria-label","Question "+(k+1));d.onclick=function(){show(k)};n.appendChild(d)})}
+$("prev").onclick=function(){if(cur>0)show(cur-1)};
+$("next").onclick=function(){if(cur<N-1)show(cur+1)};
+$("flag").onclick=function(){flg[cur]=!flg[cur];show(cur)};
+$("finish").onclick=function(){var m=N-ans.filter(function(x){return x!==undefined}).length;if(m>0&&!confirm(m+" question(s) sans réponse. Terminer quand même ?"))return;finish()};
+function finish(){if(done)return;done=true;clearInterval(tm);var used=Math.min(1800,Math.round((Date.now()-t0)/1000));$("test").hidden=true;
+var sc=[],tt=[],h="",T=0,G=0,un=0,s;for(s=0;s<9;s++){sc[s]=0;tt[s]=0}
+Q.forEach(function(q,i){if(q.s<9){tt[q.s]++;if(ans[i]===q.a)sc[q.s]++;if(ans[i]===undefined)un++}});
+h+='<div class="card"><h1>Résultats</h1><p>Temps : <b>'+fmt(used)+"</b>"+(free?" (sans chrono)":" sur 30:00")+" · Sans réponse : <b>"+un+"</b></p><table>";
+var worst=0,wp=2;for(s=0;s<9;s++){T+=tt[s];G+=sc[s];var p=sc[s]/tt[s];if(p<wp){wp=p;worst=s}h+="<tr><td>"+S[s]+"</td><td><b>"+sc[s]+" / "+tt[s]+"</b></td><td>"+Math.round(p*100)+" %</td></tr>"}
+var pc=Math.round(G/T*100);h+="<tr><td><b>Total</b></td><td><b>"+G+" / "+T+"</b></td><td><b>"+pc+" %</b></td></tr></table>";
+h+="<p>"+(pc>=75?"Excellent niveau : le vrai test sera abordable. Travaille surtout la vitesse.":pc>=60?"Bon niveau. Corrige les erreurs ci-dessous et refais une série.":pc>=45?"Niveau à consolider : revois les formules et les astuces de calcul avant demain.":"Base à renforcer : concentre-toi sur les techniques, pas sur la vitesse, puis refais une série.")+" Section la plus faible : <b>"+S[worst]+"</b>. Rappel : 100 questions en 30 minutes est volontairement plus dur que le vrai test.</p></div>";
+var b=Q.length-4,pr=[[b,b+1,"Calme sous pression"],[b+2,b+3,"Responsabilité face aux erreurs"]];
+h+='<div class="card"><h2>Cohérence de la personnalité</h2><table>';pr.forEach(function(p){var x=ans[p[0]],y=ans[p[1]],ok=x!==undefined&&y!==undefined&&Math.abs(x+y-6)<=1;h+="<tr><td>"+p[2]+"</td><td class='"+(ok?"ok":"ko")+"'>"+(x===undefined||y===undefined?"Sans réponse":ok?"Cohérent":"Contradictoire")+"</td></tr>"});
+h+="</table></div>";
+var errs=0,rv="";Q.forEach(function(q,i){if(q.s>=9||ans[i]===q.a)return;errs++;rv+='<div class="rev"><b>'+(i+1)+" · "+S[q.s]+"</b><br>"+q.q+(q.fig?'<div style="margin:6px 0">'+q.fig+"</div>":"")+"Ta réponse : "+(ans[i]===undefined?"<span class='ko'>aucune</span>":'<span class="inl">'+q.o[ans[i]]+"</span>")+"<br>Bonne réponse : <b class='ok'><span class='inl'>"+q.o[q.a]+"</span></b><br><span class='note'>"+q.e+"</span></div>"});
+h+='<div class="card"><h2>Correction des erreurs ('+errs+")</h2>"+(errs?rv:"<p>Aucune erreur. Bravo !</p>")+'</div><button class="btn" onclick="location.reload()">Nouvelle série</button>';
+var R2=$("res");R2.hidden=false;R2.innerHTML=h;window.scrollTo(0,0)}
+</script>
+</body>
+</html>
