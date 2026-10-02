@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Test blanc Advans – Chargé de clientèle</title>
+<style>
+:root{--bg:#f6f7f4;--card:#fff;--ink:#1d2a24;--mut:#5d6b64;--line:#d9dfda;--acc:#0f6b4f;--accb:#e3f1ea;--bad:#b3261e;--badb:#fbe6e4;--warn:#9a6700;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121815;--card:#1a231e;--ink:#e8eee9;--mut:#9aa8a0;--line:#2c3a33;--acc:#4cc59a;--accb:#173226;--bad:#ff8a80;--badb:#3a1e1c;--warn:#e3b341}}
+:root[data-theme="dark"]{--bg:#121815;--card:#1a231e;--ink:#e8eee9;--mut:#9aa8a0;--line:#2c3a33;--acc:#4cc59a;--accb:#173226;--bad:#ff8a80;--badb:#3a1e1c;--warn:#e3b341}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.5}
+main{max-width:720px;margin:0 auto;padding:16px}
+h1,h2{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:.2em 0 .4em}
+h1{font-size:1.7rem}h2{font-size:1.25rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin:12px 0}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+#timer{font-family:Georgia,serif;font-size:1.6rem;font-weight:700;color:var(--acc)}
+#timer.low{color:var(--bad)}
+.sec{color:var(--mut);font-size:.95rem}
+.opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0;font:inherit;cursor:pointer}
+.opt:hover{border-color:var(--acc)}
+.opt.sel{border-color:var(--acc);background:var(--accb);font-weight:600}
+.btn{background:var(--acc);color:var(--bg);border:0;border-radius:8px;padding:12px 20px;font:inherit;font-weight:600;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.btn:focus-visible,.opt:focus-visible,.dot:focus-visible{outline:3px solid var(--warn);outline-offset:2px}
+.row{display:flex;gap:10px;justify-content:space-between;margin-top:14px;flex-wrap:wrap}
+.nav{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
+.dot{width:32px;height:32px;border-radius:6px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.85rem;cursor:pointer;padding:0}
+.dot.done{background:var(--accb);border-color:var(--acc)}
+.dot.cur{outline:2px solid var(--ink)}
+.lik{display:flex;gap:6px}.lik .opt{text-align:center;padding:12px 0;margin:6px 0}
+.lab{display:flex;justify-content:space-between;color:var(--mut);font-size:.85rem}
+.ok{color:var(--acc)}.ko{color:var(--bad)}
+.rev{border-left:4px solid var(--line);padding:6px 12px;margin:12px 0}
+.rev.ok{border-color:var(--acc)}.rev.ko{border-color:var(--bad);background:var(--badb)}
+table{width:100%;border-collapse:collapse}td,th{padding:8px;border-bottom:1px solid var(--line);text-align:left}
+.note{color:var(--mut);font-size:.9rem}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<section id="intro" class="card">
+<h1>Test blanc – Chargé de clientèle</h1>
+<p>Format proche du test réel : <b>30 minutes</b>, une seule tentative, <b>sans calculatrice</b> (brouillon autorisé). 32 questions : calcul, logique, culture pratique, gestion et comptabilité, bon sens, personnalité.</p>
+<p>Réponds vite : ne reste pas plus d'une minute sur une question, passe et reviens. Le chrono démarre au clic.</p>
+<button class="btn" id="go">Commencer le test</button>
+</section>
+
+<section id="test" hidden>
+<div class="top"><span class="sec" id="secname"></span><span id="timer">30:00</span></div>
+<div class="card"><div class="sec" id="qnum"></div><h2 id="qtext"></h2><div id="opts"></div>
+<div class="row"><button class="btn alt" id="prev">Précédente</button><button class="btn" id="next">Suivante</button></div></div>
+<div class="nav" id="nav"></div>
+<button class="btn alt" id="finish">Terminer et voir la correction</button>
+</section>
+
+<section id="res" hidden></section>
+</main>
+<script>
+var S=["Calcul","Logique","Culture pratique","Gestion et comptabilité","Bon sens professionnel","Personnalité"];
+var Q=[
+[0,"Quelle est la valeur de 15 % de 80 000 FCFA ?",["10 000","12 000","12 500","15 000"],1,"10 % = 8 000 et 5 % = 4 000, donc 12 000."],
+[0,"Un article à 25 000 FCFA est soldé à -20 %. Nouveau prix ?",["20 000","22 500","5 000","21 000"],0,"20 % de 25 000 = 5 000, donc 25 000 − 5 000 = 20 000."],
+[0,"Un prix passe de 500 à 650 FCFA. Quelle est l'augmentation ?",["15 %","25 %","30 %","150 %"],2,"Hausse de 150 sur une base de 500 : 150/500 = 30 %."],
+[0,"5 cahiers coûtent 2 250 FCFA. Combien coûtent 8 cahiers ?",["3 200","3 600","3 800","4 000"],1,"Règle de trois : 2 250 / 5 = 450 l'unité ; 450 × 8 = 3 600."],
+[0,"Capital de 200 000 FCFA à 6 % d'intérêt simple par an. Intérêt au bout de 9 mois ?",["6 000","9 000","10 800","12 000"],1,"Intérêt annuel 12 000 ; 9 mois = 3/4 de l'année ; 12 000 × 0,75 = 9 000."],
+[0,"Prix TTC de 118 000 FCFA avec une TVA de 18 %. Quel est le prix HT ?",["96 760","99 000","100 000","104 000"],2,"TTC = HT × 1,18 ; 118 000 / 1,18 = 100 000. (Piège : retirer 18 % de 118 000 est faux.)"],
+[0,"4 ouvriers terminent un chantier en 12 jours. Avec 6 ouvriers au même rythme ?",["6 jours","8 jours","9 jours","18 jours"],1,"Travail total = 48 jours-ouvriers ; 48 / 6 = 8 jours."],
+[0,"Un salaire de 250 000 augmente de 10 %, puis baisse de 10 %. Résultat ?",["250 000","247 500","275 000","245 000"],1,"250 000 × 1,1 = 275 000 ; 275 000 × 0,9 = 247 500. Les % ne s'annulent pas."],
+[1,"Suite : 3, 6, 12, 24, ?",["30","36","42","48"],3,"Chaque terme est multiplié par 2."],
+[1,"Suite : 2, 5, 10, 17, 26, ?",["35","36","37","39"],2,"Écarts : +3, +5, +7, +9, puis +11 = 37 (n² + 1)."],
+[1,"Suite : A, C, F, J, ?",["M","N","O","P"],2,"Sauts de +2, +3, +4, puis +5 : J + 5 = O."],
+[1,"Suite : 1, 1, 2, 3, 5, 8, ?",["11","12","13","14"],2,"Fibonacci : chaque terme = somme des deux précédents (5 + 8 = 13)."],
+[1,"Tous les chargés de clientèle sont rigoureux. Awa est rigoureuse. Peut-on conclure qu'Awa est chargée de clientèle ?",["Oui, forcément","Non, on ne peut pas conclure","Non, elle ne l'est pas","Oui, si elle est rigoureuse depuis longtemps"],1,"Les chargés sont inclus dans les rigoureux, pas l'inverse : conclusion impossible."],
+[1,"3 machines fabriquent 3 pièces en 3 minutes. Combien de temps pour que 100 machines fabriquent 100 pièces ?",["3 minutes","33 minutes","100 minutes","1 minute"],0,"Une machine fait 1 pièce en 3 minutes ; 100 machines font 100 pièces en 3 minutes."],
+[2,"Ordre de grandeur du prix d'une tablette de 30 œufs en Côte d'Ivoire ?",["≈ 900 FCFA","≈ 2 500 FCFA","≈ 5 000 FCFA","≈ 8 000 FCFA"],1,"Environ 2 000 à 3 000 FCFA selon le marché. Les prix varient : vérifie-les dans ton quartier."],
+[2,"Ordre de grandeur du prix d'un litre de super sans plomb à la pompe ?",["≈ 300 FCFA","≈ 600 FCFA","≈ 900 FCFA","≈ 1 500 FCFA"],2,"Autour de 850 à 950 FCFA ; le prix est réglementé et peut être révisé. Vérifie le dernier tarif en vigueur."],
+[2,"Quelle institution émet le franc CFA en Côte d'Ivoire ?",["BEAC","BCEAO","BIDC","BOAD"],1,"La BCEAO pour l'UEMOA. La BEAC est pour la zone CEMAC."],
+[3,"Achat 60 000 FCFA, vente 75 000 FCFA. Taux de marge sur le prix d'achat ?",["15 %","20 %","25 %","80 %"],2,"Marge 15 000 / 60 000 = 25 %."],
+[3,"Capitaux propres : 5 M ; dettes : 3 M. Que vaut le total de l'actif ?",["2 M","5 M","8 M","15 M"],2,"Actif = Passif = capitaux propres + dettes = 8 M."],
+[3,"Laquelle n'est PAS une charge fixe ?",["Loyer du local","Assurance annuelle","Matières premières consommées","Salaire mensuel fixe"],2,"Les matières consommées varient avec l'activité : charge variable."],
+[3,"Produits : 12 M ; charges : 9,5 M. Résultat ?",["Perte de 2,5 M","Bénéfice de 2,5 M","Bénéfice de 21,5 M","Bénéfice de 9,5 M"],1,"Résultat = produits − charges = 2,5 M (bénéfice)."],
+[3,"Une créance client est :",["Une dette","Une charge","Un actif","Un capital"],2,"C'est une somme que le client doit à l'entreprise : un actif."],
+[3,"Prêt de 1 000 000 FCFA à 2 % par mois sur 5 mois, intérêt simple. Intérêts totaux ?",["20 000","100 000","102 000","110 000"],1,"20 000 par mois × 5 = 100 000."],
+[4,"Un client veut un crédit, mais son dossier est incomplet et il est pressé. Meilleure attitude ?",["Accorder pour ne pas le perdre","Refuser sèchement","Lister les pièces manquantes, l'aider à compléter et annoncer le délai","Passer le dossier à un collègue sans explication"],2,"Rigueur, pédagogie et respect de la procédure, sans froisser le client."],
+[4,"Vous constatez une erreur dans un dossier que vous avez saisi hier. Que faites-vous ?",["Rien, personne ne l'a vue","La corriger discrètement","Alerter votre responsable et corriger selon la procédure","Accuser le système informatique"],2,"Transparence, responsabilité et traçabilité."],
+[4,"Un client mécontent hausse le ton au guichet.",["Hausser le ton aussi","L'ignorer","Écouter, reformuler, proposer une solution ou escalader","Lui demander de revenir demain"],2,"Calme, écoute, solution : l'attitude attendue d'un chargé de clientèle."],
+[5,"Je garde mon calme quand la pression monte.",null,0,"A"],
+[5,"Sous pression, je perds facilement mes moyens.",null,0,"A"],
+[5,"Je préfère travailler en équipe plutôt que seul.",null,0,"B"],
+[5,"Je préfère régler les choses seul sans consulter mes collègues.",null,0,"B"],
+[5,"J'assume mes erreurs et je cherche à les corriger.",null,0,"C"],
+[5,"Quand je fais une erreur, je préfère ne pas en parler.",null,0,"C"]
+];
+var LK=["Pas du tout d'accord","Plutôt non","Neutre","Plutôt oui","Tout à fait d'accord"];
+var ans=[],cur=0,left=1800,tm=null,t0=0,done=false;
+var $=function(i){return document.getElementById(i)};
+function fmt(s){return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2)}
+function tick(){left--;$("timer").textContent=fmt(left);$("timer").className=left<=300?"low":"";if(left<=0)finish()}
+$("go").onclick=function(){$("intro").hidden=true;$("test").hidden=false;t0=Date.now();tm=setInterval(tick,1000);show(0)};
+function show(i){cur=i;var q=Q[i];$("secname").textContent=S[q[0]];$("qnum").textContent="Question "+(i+1)+" / "+Q.length;$("qtext").textContent=q[1];
+var o=$("opts");o.innerHTML="";
+if(q[2]){q[2].forEach(function(t,k){var b=document.createElement("button");b.className="opt"+(ans[i]===k?" sel":"");b.textContent=t;b.onclick=function(){ans[i]=k;show(i)};o.appendChild(b)})}
+else{var r=document.createElement("div");r.className="lik";for(var k=1;k<=5;k++){(function(k){var b=document.createElement("button");b.className="opt"+(ans[i]===k?" sel":"");b.textContent=k;b.onclick=function(){ans[i]=k;show(i)};r.appendChild(b)})(k)}
+o.appendChild(r);var l=document.createElement("div");l.className="lab";l.innerHTML="<span>1 = Pas du tout d'accord</span><span>5 = Tout à fait d'accord</span>";o.appendChild(l)}
+$("prev").disabled=i==0;$("next").textContent=i==Q.length-1?"Dernière question":"Suivante";
+var n=$("nav");n.innerHTML="";Q.forEach(function(_,k){var d=document.createElement("button");d.className="dot"+(ans[k]!==undefined?" done":"")+(k==i?" cur":"");d.textContent=k+1;d.setAttribute("aria-label","Question "+(k+1));d.onclick=function(){show(k)};n.appendChild(d)})}
+$("prev").onclick=function(){if(cur>0)show(cur-1)};
+$("next").onclick=function(){if(cur<Q.length-1)show(cur+1)};
+$("finish").onclick=function(){var m=Q.length-ans.filter(function(x){return x!==undefined}).length;if(m>0&&!confirm(m+" question(s) sans réponse. Terminer quand même ?"))return;finish()};
+function finish(){if(done)return;done=true;clearInterval(tm);var used=Math.min(1800,Math.round((Date.now()-t0)/1000));
+$("test").hidden=true;var R=$("res");R.hidden=false;
+var sc={},tot={},html="";
+Q.forEach(function(q,i){if(q[0]<5){tot[q[0]]=(tot[q[0]]||0)+1;if(ans[i]===q[3])sc[q[0]]=(sc[q[0]]||0)+1}});
+var T=0,G=0;html+='<div class="card"><h1>Résultats</h1><p>Temps utilisé : <b>'+fmt(used)+'</b> sur 30:00</p><table>';
+for(var s=0;s<5;s++){var g=sc[s]||0;T+=tot[s];G+=g;html+="<tr><td>"+S[s]+"</td><td><b>"+g+" / "+tot[s]+"</b></td></tr>"}
+html+="<tr><td><b>Total (hors personnalité)</b></td><td><b>"+G+" / "+T+"</b></td></tr></table>";
+var pct=Math.round(G/T*100);
+html+="<p>"+(pct>=80?"Très bon niveau : concentre-toi sur la vitesse.":pct>=60?"Bon niveau : revois les sections les plus faibles ci-dessus.":"À consolider : refais les erreurs corrigées ci-dessous, puis un nouveau test chronométré.")+"</p></div>";
+var pr=[[26,27,"Calme sous pression"],[28,29,"Travail en équipe"],[30,31,"Responsabilité face aux erreurs"]],ci='<div class="card"><h2>Cohérence de la personnalité</h2><table>';
+pr.forEach(function(p){var a=ans[p[0]],b=ans[p[1]],ok=a!==undefined&&b!==undefined&&Math.abs(a+b-6)<=1;ci+="<tr><td>"+p[2]+"</td><td class='"+(ok?"ok":"ko")+"'>"+(a===undefined||b===undefined?"Sans réponse":ok?"Cohérent":"Réponses contradictoires")+"</td></tr>"});
+ci+="</table><p class='note'>Les questions vont par paires inversées : le test vérifie que tu réponds de façon stable. Réponds toujours honnêtement, avec le profil d'un professionnel calme, fiable et collaboratif.</p></div>";
+html+=ci+'<div class="card"><h2>Correction détaillée</h2>';
+Q.forEach(function(q,i){if(q[0]>=5)return;var good=ans[i]===q[3];html+='<div class="rev '+(good?"ok":"ko")+'"><b>'+(i+1)+". "+q[1]+"</b><br>"+(ans[i]===undefined?"<span class='ko'>Sans réponse</span>":"Ta réponse : "+q[2][ans[i]]+(good?" ✓":" ✗"))+(good?"":"<br>Bonne réponse : <b>"+q[2][q[3]]+"</b>")+"<br><span class='note'>"+q[4]+"</span></div>"});
+html+='</div><button class="btn" onclick="location.reload()">Refaire le test</button>';
+R.innerHTML=html;window.scrollTo(0,0)}
+</script>
+</body>
+</html>
